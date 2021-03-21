@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  fetchUser,
-  fetchPost,
-  postComment,
-  fetchUsersLikedPosts,
-  like,
-  unlike,
-  fetchUsersLikedComments,
-  fetchPostCommentsByRecent,
-  fetchPostCommentsByPopular,
   deletePost,
-  updatePost,
+  fetchPost,
+  fetchUser,
   flagPost,
+  fetchUsersLikedComments,
+  fetchUsersLikedPosts,
+  fetchPostCommentsByPopular,
+  fetchPostCommentsByRecent,
+  like,
+  postComment,
+  unlike,
+  updatePost,
 } from '../../store/actions';
 import { toggleDropdown } from '../../utils/toggleDropdown';
 import moment from 'moment';
@@ -187,7 +187,6 @@ const Post = (props) => {
                     <button>Update Post</button>
                   </form>
                 )}
-                {console.log('post:', props.currentPost, 'user:', props.user)}
               </div>
               {props.currentPost.user_id === props.user.id ? (
                 <div>
@@ -299,12 +298,12 @@ const Post = (props) => {
               ))}
             {!props.individualPostCommentsAreFetching &&
               props.currentPostComments.length === 0 && (
-              <div className="no-comments-yet">
-                <p>
-                  <i className="fas fa-exclamation"></i>No comments yet
-                </p>
-              </div>
-            )}
+                <div className="no-comments-yet">
+                  <p>
+                    <i className="fas fa-exclamation"></i>No comments yet
+                  </p>
+                </div>
+              )}
           </div>
           {modelIsOpen && (
             <Model
