@@ -120,7 +120,7 @@ export const updateUserRole = (id, role) => (dispatch) => {
   return axios
     .put(`${BACKEND_URL}/api/admin/users/${id}/${role}`)
     .then(() => toast.success('Role Successfully Updated'))
-    .catch(() => toast.error('There was a problem updating the user\'s role.'));
+    .catch(() => toast.error("There was a problem updating the user's role."));
 };
 
 // Sets user track during onboarding
@@ -179,7 +179,7 @@ export const postQuestion = (title, description, room, history) => (
     .catch(() => toast.error('Wait! There was a problem creating your post.'));
 };
 
-// Updates a post
+// Updates a post. Sending userID to check against user in post ID to make sure users can only change their own posts.
 export const updatePost = (userID, postID, newDescription) => (dispatch) => {
   return axios
     .put(`${BACKEND_URL}/api/post/update/${userID}/${postID}`, {
@@ -340,9 +340,11 @@ export const retrieveFullSearchResults = (search) => (dispatch) => {
 
 export const flagPost = (id, reason) => (dispatch) => {
   axios
-    .post(`${BACKEND_URL}/api/mod/posts/${id}`, { reason: reason})
+    .post(`${BACKEND_URL}/api/mod/posts/${id}`, { reason: reason })
     .then(() => {
-      toast.success(`Thanks! That post was successfully flagged as "${reason}"`);
+      toast.success(
+        `Thanks! That post was successfully flagged as "${reason}"`
+      );
     })
     .catch(() => {
       toast.error('Hmm... That post could not be flagged');
@@ -351,9 +353,11 @@ export const flagPost = (id, reason) => (dispatch) => {
 
 export const flagComment = (id, reason) => (dispatch) => {
   axios
-    .post(`${BACKEND_URL}/api/mod/comments/${id}`, { reason: reason})
+    .post(`${BACKEND_URL}/api/mod/comments/${id}`, { reason: reason })
     .then(() => {
-      toast.success(`Thanks! That comment was successfully flagged as "${reason}"`);
+      toast.success(
+        `Thanks! That comment was successfully flagged as "${reason}"`
+      );
     })
     .catch(() => {
       toast.error('Hmm... That comment could not be flagged');

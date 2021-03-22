@@ -106,11 +106,18 @@ const Post = (props) => {
     }
   };
 
-  //updating a post
   const handleUpdatePost = (e) => {
     e.preventDefault();
-    props.updatePost(props.user.id, postID, postInput).then(() => {
-      props.fetchPost(postID);
+    // creates new post with updated description input
+    let post = {
+      ...props.currentPost,
+      description: postInput,
+    };
+
+    props.updatePost(post, props.user).then(() => {
+      // used to fetch updated post and
+      // updates currentPost within our store
+      props.fetchPost(post.id);
     });
     setEditing(false);
   };
@@ -120,12 +127,12 @@ const Post = (props) => {
     props.flagPost(postID, reason);
   };
 
-  //opens flagging model
+  // opens flagging model
   const openModel = () => {
     setModelIsOpen(true);
   };
 
-  //closes flagging model
+  // closes flagging model
   const closeModel = () => {
     setModelIsOpen(false);
   };
@@ -310,7 +317,7 @@ const Post = (props) => {
               isOpen={modelIsOpen}
               onRequestClose={closeModel}
               contentLabel="Flag Post"
-              ariaHideApp={false} //Hides from screen readers. This isn't ideal, but without it, it throws an error
+              ariaHideApp={false} // Hides from screen readers. This isn't ideal, but without it, it throws an error
             >
               <div>
                 <div>
