@@ -179,7 +179,7 @@ export const postQuestion = (title, description, room, history) => (
     .catch(() => toast.error('Wait! There was a problem creating your post.'));
 };
 
-// Updates a post. Sending userID to check against user in post ID to make sure users can only change their own posts.
+// Updates a post
 export const updatePost = (post) => (dispatch) => {
   return axios
     .put(`${BACKEND_URL}/api/post/${post.id}`, {
