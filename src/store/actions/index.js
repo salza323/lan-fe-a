@@ -180,10 +180,10 @@ export const postQuestion = (title, description, room, history) => (
 };
 
 // Updates a post. Sending userID to check against user in post ID to make sure users can only change their own posts.
-export const updatePost = (userID, postID, newDescription) => (dispatch) => {
+export const updatePost = (post) => (dispatch) => {
   return axios
-    .put(`${BACKEND_URL}/api/post/update/${userID}/${postID}`, {
-      newDescription,
+    .put(`${BACKEND_URL}/api/post/${post.id}`, {
+      post,
     })
     .then(() => toast.success('Your post was successfully updated.'))
     .catch(() => toast.error('Oh no! There was a problem updating your post.'));

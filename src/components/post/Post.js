@@ -114,7 +114,7 @@ const Post = (props) => {
       description: postInput,
     };
 
-    props.updatePost(post, props.user).then(() => {
+    props.updatePost(post).then(() => {
       // used to fetch updated post and
       // updates currentPost within our store
       props.fetchPost(post.id);
